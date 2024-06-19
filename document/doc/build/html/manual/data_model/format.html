@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File format &mdash; LUE  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Framework" href="../framework/index.html" />
+    <link rel="prev" title="Concepts" href="concept.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LUE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../example/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">data model</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="concept.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">File format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html">framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../view/index.html">view</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pcraster/index.html">PCRaster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release/index.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication/index.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LUE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Manual</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Data model</a></li>
+      <li class="breadcrumb-item active">File format</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="file-format">
+<h1>File format<a class="headerlink" href="#file-format" title="Link to this heading"></a></h1>
+<p>The LUE physical data model is a file format that is implemented on top
+of HDF5. HDF5 is a data model itself, as well as a library of functions
+with an associated API. More information about HDF5 can be found on the
+<a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/HDF5">HDF5 support portal</a>.</p>
+<p>The LUE data model is a convention for organizing information about large
+collections of objects in an HDF5 file. In HDF5 information is stored
+using groups, datasets, and attributes. Groups can contain groups and
+datasets. Datasets contain multidimensional arrays. Groups and dataset
+can contain attributes.</p>
+<p>In the next figure, the layout of the LUE physical data model is
+shown.</p>
+<div class="graphviz"><object data="../../_images/graphviz-b25eda13acb71cb6a72de4dc112c66a22096056a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph physical_data_model {
+
+    graph [
+        fontname=&quot;Arial&quot;
+        fontsize=14
+        margin=0.1
+        nodesep=0.1
+        ranksep=0.3
+        bgcolor=&quot;transparent&quot;
+    ]
+
+    node [
+        fontname=&quot;Arial&quot;
+        fontsize=14
+        fontcolor=&quot;white&quot;
+        shape=&quot;oval&quot;
+        style=&quot;filled&quot;
+    ]
+
+    edge [
+        fontname=&quot;Arial&quot;
+        fontsize=14
+    ]
+
+    dataset [
+        label=&quot;dataset&quot;
+        fillcolor=&quot;#88C0D0&quot;
+    ]
+
+    universes [
+        label=&quot;universes&quot;
+        fillcolor=&quot;#d08770&quot;
+    ]
+
+    universe [
+        label=&quot;universe&quot;
+        fillcolor=&quot;#d08770&quot;
+    ]
+
+    phenomena [
+        label=&quot;phenomena&quot;
+        fillcolor=&quot;#b48ead&quot;
+    ]
+
+    phenomenon [
+        label=&quot;phenomenon&quot;
+        fillcolor=&quot;#b48ead&quot;
+    ]
+
+    object_id [
+        label=&quot;object-id&quot;
+        fillcolor=&quot;#434c5e&quot;
+    ]
+
+    collection_property_sets [
+        label=&quot;collection property-sets&quot;
+        fillcolor=&quot;#bf616a&quot;
+    ]
+
+    property_sets [
+        label=&quot;property-sets&quot;
+        fillcolor=&quot;#bf616a&quot;
+    ]
+
+    property_set [
+        label=&quot;property-set&quot;
+        fillcolor=&quot;#bf616a&quot;
+    ]
+
+    object_tracker [
+        label=&quot;object tracker&quot;
+        fillcolor=&quot;#434c5e&quot;
+    ]
+
+    active_set_index [
+        label=&quot;active set index&quot;
+        fillcolor=&quot;#434c5e&quot;
+    ]
+
+    active_object_index [
+        label=&quot;active object index&quot;
+        fillcolor=&quot;#434c5e&quot;
+    ]
+
+    active_object_id [
+        label=&quot;active object id&quot;
+        fillcolor=&quot;#434c5e&quot;
+    ]
+
+    properties [
+        label=&quot;properties&quot;
+        fillcolor=&quot;#a3be8c&quot;
+    ]
+
+    property [
+        label=&quot;property&quot;
+        fillcolor=&quot;#a3be8c&quot;
+    ]
+
+    time_domain [
+        label=&quot;time domain&quot;
+        fillcolor=&quot;#5e81ac&quot;
+    ]
+
+    space_domain [
+        label=&quot;space domain&quot;
+        fillcolor=&quot;#5e81ac&quot;
+    ]
+
+    value [
+        label=&quot;value&quot;
+        fillcolor=&quot;#ebcb8b&quot;
+    ]
+
+
+    dataset -&gt; universes [
+        label=&quot;1&quot;
+    ]
+
+    universes -&gt; universe [
+        label=&quot;*&quot;
+    ]
+
+    universe -&gt; phenomena [
+        label=&quot;1&quot;
+    ]
+
+    dataset -&gt; phenomena [
+        label=&quot;1&quot;
+    ]
+
+    phenomena -&gt; phenomenon [
+        label=&quot;*&quot;
+    ]
+
+    phenomenon -&gt; collection_property_sets [
+        label=&quot;1&quot;
+    ]
+
+    collection_property_sets -&gt; property_set [
+        label=&quot;*&quot;
+    ]
+
+    phenomenon -&gt; property_sets [
+        label=&quot;1&quot;
+    ]
+
+    phenomenon -&gt; object_id [
+        label=&quot;1&quot;
+    ]
+
+    property_sets -&gt; property_set [
+        label=&quot;*&quot;
+    ]
+
+    property_set -&gt; object_tracker [
+        label=&quot;1&quot;
+    ]
+
+    object_tracker -&gt; active_set_index [
+        label=&quot;1&quot;
+    ]
+
+    object_tracker -&gt; active_object_index [
+        label=&quot;1&quot;
+    ]
+
+    object_tracker -&gt; active_object_id [
+        label=&quot;1&quot;
+    ]
+
+    property_set -&gt; time_domain [
+        label=&quot;1&quot;
+    ]
+
+    property_set -&gt; space_domain [
+        label=&quot;1&quot;
+    ]
+
+    property_set -&gt; properties [
+        label=&quot;1&quot;
+    ]
+
+    properties -&gt; property [
+        label=&quot;*&quot;
+    ]
+
+    property -&gt; value [
+        label=&quot;1&quot;
+    ]
+
+}</p></object></div>
+<p>The API for storing information in a LUE dataset reflects this
+layout. See for example the next example which uses the LUE Python
+package and in which a new dataset is created. The object returned by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lue.data_model.create_dataset()</span></code> supports adding a universe to the
+universes collection and a phenomenon to the phenomena collection. The
+object returned by <code class="xref py py-func docutils literal notranslate"><span class="pre">lue.data_model.Dataset.add_phenomenon()</span></code>
+supports adding collection property-sets and property-sets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TODO</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="concept.html" class="btn btn-neutral float-left" title="Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../framework/index.html" class="btn btn-neutral float-right" title="Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-now, LUE R&amp;D team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

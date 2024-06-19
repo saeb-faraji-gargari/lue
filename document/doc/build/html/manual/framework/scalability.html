@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scalability experiments &mdash; LUE  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="View" href="../view/index.html" />
+    <link rel="prev" title="Execute LUE framework programs" href="execute.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LUE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../example/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../data_model/index.html">data model</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="python/index.html">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp/index.html">C++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="execute.html">Execute LUE framework programs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Scalability experiments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#strong-scalability">Strong scalability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#weak-scalability">Weak scalability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tips-and-tricks">Tips and tricks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../view/index.html">view</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pcraster/index.html">PCRaster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release/index.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication/index.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LUE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Manual</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Framework</a></li>
+      <li class="breadcrumb-item active">Scalability experiments</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scalability-experiments">
+<span id="id1"></span><h1>Scalability experiments<a class="headerlink" href="#scalability-experiments" title="Link to this heading"></a></h1>
+<p>The goal of a scalability experiment is to determine how well software is able to make good
+use of additional hardware. In the case of a LUE model, the goal is to determine how well the
+model is capable of using additional CPU cores, NUMA nodes (grouping CPU cores), or cluster nodes
+(grouping NUMA nodes). These are the kinds of workers we will focus on here.</p>
+<p>There are two kinds of scalability: strong scalability and weak scalability. Strong scalability
+is not better than weak scalability. They are just different kinds of scalability. Depending
+on your use-case, you may be more interested in strong scalability or in weak scalability.</p>
+<p>There are limits to scalability. Any piece of software will scale up to a certain number of
+workers. Serial software scales up to 1 worker, parallel software may scale up to many
+more. Scalability measures must always be associated with the number of workers used to
+calculate them.</p>
+<section id="strong-scalability">
+<h2>Strong scalability<a class="headerlink" href="#strong-scalability" title="Link to this heading"></a></h2>
+<p>Strong scalability is relevant if you are interested in speeding up your existing model. A
+model that has a high strong scalability can make good use of additional hardware to make it
+finish faster.</p>
+<p>In the case of a strong scalability experiment, the goal is to determine whether the model
+executes faster when more workers are allocated to the process. The problem size (model + data)
+stays the same each time the model is run on a larger amount of hardware.</p>
+<p>Strong scalability is harder to achieve than weak scalability. Software contains serial and
+parallel fractions. Serial fractions can’t make use of additional workers - they have to run in
+serial. Parallel fractions may make good using of additional workers. Even in case of a small
+serial fraction and a perfectly scalable parallel fraction, overall strong scalability will be
+limited. See the <a class="reference external" href="https://en.wikipedia.org/wiki/Amdahl%27s_law">Wikipedia page on Amdahl’s law</a> for a sobering explanation of this fact.</p>
+<p>A good way to express strong scalability is the relative strong scalability efficiency
+(<span class="math notranslate nohighlight">\(RSE_{strong}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[RSE_{strong} = \frac{T_{S,1}}{P \times T_{S,P}} \times 100\%\]</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(P\)</span></p></td>
+<td><p>Number of workers</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(T_{S,1}\)</span></p></td>
+<td><p>Latency when using one worker</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(T_{S,P}\)</span></p></td>
+<td><p>Latency when working <span class="math notranslate nohighlight">\(P\)</span> workers</p></td>
+</tr>
+</tbody>
+</table>
+<p>For a strong scalability experiment you have to run the model multiple times, at least once
+for each number of workers, and measure the amount of time it takes to finish executing.</p>
+</section>
+<section id="weak-scalability">
+<h2>Weak scalability<a class="headerlink" href="#weak-scalability" title="Link to this heading"></a></h2>
+<p>Weak scalability is relevant if you are interested in increasing the amount of data used by your
+model. A model that has high weak scalability can make good use of the additional hardware to
+make the time used to execute it not increase much.</p>
+<p>In the case of a weak scalability experiment, the goal is to determine whether or not the time
+it takes to execute a model stays the same when the amount of data and the amount of workers
+is increased. The amount of data is scaled linearly with the number of workers.</p>
+<p>Weak scalability is easier to achieve than strong scalability due to the fact that increases
+in the size of the dataset used, often has an effect on the parallel fraction of the software
+and not on the serial fraction. See the <a class="reference external" href="https://en.wikipedia.org/wiki/Gustafson%27s_law">Wikipedia page on Gustafson’s law</a> for more information
+about this.</p>
+<p>A good way to express scalability is the relative weak scalability efficiency (<span class="math notranslate nohighlight">\(RSE_{weak}\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[RSE_{weak} = \frac{T_{W,1}}{T_{W,P}} \times 100\%\]</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(P\)</span></p></td>
+<td><p>Number of workers</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(T_{W,1}\)</span></p></td>
+<td><p>Latency when using one worker</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(T_{W,P}\)</span></p></td>
+<td><p>Latency when working <span class="math notranslate nohighlight">\(P\)</span> workers</p></td>
+</tr>
+</tbody>
+</table>
+<p>For a strong scalability experiment you have to run the model multiple times, at least once
+for each number of workers, and measure the amount of time it takes to finish executing. The
+size of the datasets must be scaled linearly with the number of workers used.</p>
+</section>
+<section id="tips-and-tricks">
+<h2>Tips and tricks<a class="headerlink" href="#tips-and-tricks" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Be clear about what you want to measure. If you want to determine the scalability of the
+computations, then make sure that your timings don’t include time spent on I/O.</p></li>
+<li><p>Make sure that the hardware used to execute the model is not also used by other (heavy)
+processes.</p></li>
+<li><p>Make sure that the problem size is “compatible” with the hardware. For example, calculate
+the amount of RAM per CPU and make sure that this value times the number of CPUs is never
+exceeded during the experiments.</p></li>
+<li><p>During test runs, monitor the hardware. Are all CPUs used indeed busy all the time. Is the
+memory usage of the model within the expected bounds?</p></li>
+<li><p>All experiments should take at least a few seconds to finish. Ideally tens of seconds or more.</p></li>
+<li><p>Only do scalability experiments of LUE models with a partition size for which the model
+executes fastest.</p></li>
+<li><p>Make sure the number of partitions is larger than the number of CPU cores used in the
+experiment. Otherwise the CPUs will be drained of useful work to do. This may indicate that you
+are using too much hardware for the problem size.</p></li>
+<li><p>A good way to present the results is to graph <span class="math notranslate nohighlight">\(RSE_{strong}\)</span> or <span class="math notranslate nohighlight">\(RSE_{weak}\)</span>
+against <span class="math notranslate nohighlight">\(P\)</span>. Also plot the lines for linear (perfect) and serial (no) scalability. This
+helps putting the actual scalabilities into perspective visually.</p></li>
+<li><p>It may be useful to run the model multiple times for each number of workers, to learn about
+the spread in the results.</p></li>
+<li><p>Some more information and scripts for automating scalability experiments can be found in the
+<a class="reference external" href="https://github.com/computationalgeography/lue_qa">LUE Quality Assurance</a> repository. Use it for inspiration, but note that this is still very
+much work in progress.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="execute.html" class="btn btn-neutral float-left" title="Execute LUE framework programs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../view/index.html" class="btn btn-neutral float-right" title="View" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-now, LUE R&amp;D team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

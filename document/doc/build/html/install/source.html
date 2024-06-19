@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install from source &mdash; LUE  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../example/index.html" />
+    <link rel="prev" title="Install using Conda" href="conda.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            LUE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="conda.html">Install using Conda</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install from source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#targets">Targets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-model">Data model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#framework">Framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view">View</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qa">QA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../example/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/index.html">Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pcraster/index.html">PCRaster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release/index.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publication/index.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../related.html">Related</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LUE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Installation</a></li>
+      <li class="breadcrumb-item active">Install from source</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="install-from-source">
+<span id="install-source"></span><h1>Install from source<a class="headerlink" href="#install-from-source" title="Link to this heading"></a></h1>
+<p>The LUE source code can be obtained from the <a class="reference external" href="https://github.com/computationalgeography/lue">LUE Github project
+page</a>. CMake is used to configure and generate project files for
+building LUE.</p>
+<p>The following CMake variables are used to determine which targets to build:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>LUE_BUILD_DATA_MODEL</cite></p></td>
+<td><p><cite>TRUE</cite></p></td>
+<td><p>Build data model C++ API</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_BUILD_FRAMEWORK</cite></p></td>
+<td><p><cite>TRUE</cite></p></td>
+<td><p>Build modelling framework</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_BUILD_VIEW</cite></p></td>
+<td><p><cite>TRUE</cite></p></td>
+<td><p>Build data model viewer</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_BUILD_DOCUMENTATION</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build API documentation</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_BUILD_QA</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build QA targets</p></td>
+</tr>
+</tbody>
+</table>
+<p>Here is an example session of building the default LUE targets and
+installing them in <cite>$HOME/lue_install</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/tmp
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/computationalgeography/lue.git
+<span class="nb">cd</span><span class="w"> </span>lue
+mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/lue_install<span class="w"> </span>..
+cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>--target<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Also, you can check the <a class="reference external" href="https://github.com/computationalgeography/lue/tree/master/.github/workflows">LUE Github workflow scripts</a> behind the <a class="reference external" href="https://github.com/computationalgeography/lue/actions">LUE Github C/I actions</a>
+to see how LUE can be built on various platforms.</p>
+<section id="targets">
+<h2>Targets<a class="headerlink" href="#targets" title="Link to this heading"></a></h2>
+<section id="data-model">
+<h3>Data model<a class="headerlink" href="#data-model" title="Link to this heading"></a></h3>
+<p>Optional features:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>LUE_DATA_MODEL_WITH_PYTHON_API</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build data model Python API</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_DATA_MODEL_WITH_UTILITIES</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build command line utilities</p></td>
+</tr>
+</tbody>
+</table>
+<section id="dependencies">
+<h4>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>HDF5 C, Boost, fmt</p></li>
+<li><p><cite>LUE_DATA_MODEL_WITH_PYTHON_API</cite>: Python, pybind11, NumPy, Guidelines Support libraries</p></li>
+<li><p><cite>LUE_DATA_MODEL_WITH_UTILITIES</cite>: Docopt, GDAL, Nlohmann JSON</p></li>
+</ul>
+</section>
+</section>
+<section id="framework">
+<h3>Framework<a class="headerlink" href="#framework" title="Link to this heading"></a></h3>
+<p>Optional features:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>LUE_FRAMEWORK_WITH_PYTHON_API</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build modelling framework Python API</p></td>
+</tr>
+</tbody>
+</table>
+<section id="id1">
+<h4>Dependencies<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Boost, Docopt, fmt, GDAL, HPX, LUE data model, Kokkos mdspan</p></li>
+<li><p><cite>LUE_FRAMEWORK_WITH_PYTHON_API</cite>: Python, pybind11, NumPy</p></li>
+</ul>
+</section>
+</section>
+<section id="view">
+<h3>View<a class="headerlink" href="#view" title="Link to this heading"></a></h3>
+<section id="id2">
+<h4>Dependencies<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Dear ImGUI, Docopt, fmt, GLFW, Nlohmann JSON, OpenGL</p></li>
+</ul>
+</section>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
+<section id="id3">
+<h4>Dependencies<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Breathe, Doxygen, Graphviz, Sphinx</p></li>
+</ul>
+</section>
+</section>
+<section id="qa">
+<h3>QA<a class="headerlink" href="#qa" title="Link to this heading"></a></h3>
+<p>Optional features:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>LUE_QA_WITH_PYTHON_API</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build QA Python API</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_QA_WITH_TESTS</cite></p></td>
+<td><p><cite>FALSE</cite></p></td>
+<td><p>Build test targets</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_QA_TEST_NR_LOCALITIES_PER_TEST</cite></p></td>
+<td><p><cite>1</cite></p></td>
+<td><p>Number of localities used when testing the framework</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_QA_TEST_NR_THREADS_PER_LOCALITY</cite></p></td>
+<td><p><cite>1</cite></p></td>
+<td><p>Number of threads per locality used when testing the framework</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_QA_TEST_HPX_RUNWRAPPER</cite></p></td>
+<td><p><cite>none</cite></p></td>
+<td><p>Runwrapper to use (see <code class="docutils literal notranslate"><span class="pre">hpxrun.py</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_QA_TEST_HPX_PARCELPORT</cite></p></td>
+<td><p><cite>tcp</cite></p></td>
+<td><p>Parcelport to use (see <code class="docutils literal notranslate"><span class="pre">hpxrun.py</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changing <cite>LUE_QA_TEST_NR_LOCALITIES_PER_TEST</cite> and
+<cite>LUE_QA_TEST_NR_THREADS_PER_LOCALITY</cite> is only relevant for tests that
+depend on the HPX library. Using multiple localities
+(<cite>LUE_QA_TEST_NR_LOCALITIES_PER_TEST</cite> &gt; 1), requires that HPX is
+built with support for networking.</p>
+</div>
+<section id="id4">
+<h4>Dependencies<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Nlohmann JSON</p></li>
+<li><p><cite>LUE_QA_WITH_TESTS</cite>: Boost filesytem, sytem, unit-test framework libraries</p></li>
+<li><p><cite>LUE_QA_WITH_PYTHON_API</cite>: pybind11, Python</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id5">
+<h2>Dependencies<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>There are at least three options for installing prerequisite libraries and tools:</p>
+<ol class="arabic simple">
+<li><p>Install using platform specific package manager</p></li>
+<li><p>Install using Conan, either before building LUE or by the LUE build
+scripts</p></li>
+<li><p>Build by the LUE build scripts</p></li>
+</ol>
+<p>The next variables determine what happens in each case by default.</p>
+<p><cite>LUE_HAVE_FOO</cite>:</p>
+<ul class="simple">
+<li><p>TRUE: Search for Foo in standard locations</p></li>
+<li><p>FALSE: Install Foo using Conan</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>WIN32</p></th>
+<th class="head"><p>APPLE</p></th>
+<th class="head"><p>Other</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>LUE_HAVE_BOOST</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_HAVE_DOCOPT</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_HAVE_DOXYGEN</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_HAVE_GDAL</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_HAVE_FMT</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_HAVE_GLFW</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_HAVE_HDF5</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_HAVE_MS_GSL</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>LUE_HAVE_NLOHMANN_JSON</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_HAVE_PYBIND11</cite></p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+</tr>
+</tbody>
+</table>
+<p>Some prerequisite libraries can optionally be built by the LUE project
+itself. The following variables are used to decide whether or not that
+is the case. By default, they are not set.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Effect when set</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>LUE_BUILD_HPX</cite></p></td>
+<td><p>Build the HPX library</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>LUE_BUILD_OTF2</cite></p></td>
+<td><p>Build the OTF2 library (optionally required by HPX)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="conda.html" class="btn btn-neutral float-left" title="Install using Conda" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../example/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-now, LUE R&amp;D team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
